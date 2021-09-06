@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :authorize, only: [:new, :create, :welcome]
+
   def new
   end
 
@@ -6,7 +8,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
        session[:user_id] = @user.id
-       redirect_to '/welcome'
+       redirect_to '/albums'
     else
        redirect_to '/login'
        flash[:alert] = "Sorry, we couldn't find an account with this username. Please check you're using the right username and try again."

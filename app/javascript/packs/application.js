@@ -15,3 +15,35 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+let artistsArray = [];
+let apiUrl = 'https://moat.ai/api/task';
+
+function displayArtists() {
+	artistsArray.forEach((artist) => {
+		const name = artist[0].name;
+		const option = document.createElement('option');
+		option.setAttribute('value', name);
+		option.innerHTML = name;
+
+		document.body.querySelector('select').appendChild(option);
+	});
+}
+
+async function getArtists() {
+	try {
+		const response = await fetch(apiUrl, {
+			method: 'GET',
+			headers: {
+				Authorization: 'none',
+				Basic: 'ZGV2ZWxvcGVyOlpHVjJaV3h2Y0dWeQ==',
+			},
+		});
+		artistsArray = await response.json();
+		displayArtists();
+	} catch (error) {
+		console.log('whoops, error here:', error);
+	}
+}
+
+getArtists();
