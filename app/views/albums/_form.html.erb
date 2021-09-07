@@ -11,22 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :artist %>
-    <%= form.select(:artist, []) %>
+  <div class="mb-3">
+    <%= form.label :artist, class: 'form-label' %>
+    <%= form.select(:artist, [], {}, {class: 'form-select'}) %>
   </div>
 
-  <div class="field">
-    <%= form.label :album_name %>
-    <%= form.text_field :album_name %>
+  <div class="mb-3">
+    <%= form.label :album_name, class: 'form-label' %>
+    <%= form.text_field :album_name, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :year %>
-    <%= form.number_field :year %>
+  <div class="mb-3">
+    <%= form.label :year, class: 'form-label' %>
+    <%= form.number_field :year, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Create Album", class: "btn btn-primary" %>
   </div>
 <% end %>
+<br>
