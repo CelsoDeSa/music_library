@@ -1,5 +1,9 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: %i[ show edit update destroy ]
+  before_action :get_artists, only: %i[ new edit ]
+
+  require 'rest-client'
+  require 'json'
 
   # GET /albums or /albums.json
   def index
@@ -60,6 +64,23 @@ class AlbumsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_album
       @album = Album.find(params[:id])
+    end
+
+    def get_artists
+      @artists = []
+      url = 'https://moat.ai/api/task'
+      response = RestClient.get(url, headers={
+        'Authorization': 'none',
+        'Basic': 'ZGV2ZWxvcGVyOlpHVjJaV3h2Y0dWeQ=='
+      })
+      if response.code == 200
+        names = JSON.parse(response.body)
+        names.each do |n|
+          @artists << n[0]['name']
+        end
+      else
+        @artists = ['connection error, sorry']
+      end
     end
 
     # Only allow a list of trusted parameters through.

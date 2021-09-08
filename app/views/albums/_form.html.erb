@@ -13,7 +13,7 @@
 
   <div class="mb-3">
     <%= form.label :artist, class: 'form-label' %>
-    <%= form.select(:artist, [], {}, {class: 'form-select'}) %>
+    <%= form.select(:artist, @artists, {}, {class: 'form-select'}) %>
   </div>
 
   <div class="mb-3">
