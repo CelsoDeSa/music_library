@@ -17,10 +17,12 @@ class AlbumsController < ApplicationController
   # GET /albums/new
   def new
     @album = Album.new
+    @submit = 'Novo Album'
   end
 
   # GET /albums/1/edit
   def edit
+    @submit = 'Editar Album'
   end
 
   # POST /albums or /albums.json
